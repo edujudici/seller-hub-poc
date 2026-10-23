@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 3000
+    environment:
+      VIRTUAL_HOST: seller.escaliagora.com.br
+      VIRTUAL_PORT: 3000
+      LETSENCRYPT_HOST: seller.escaliagora.com.br
+      LETSENCRYPT_EMAIL: edujudici@gmail.com
+      NODE_ENV: development
+      HOST: 0.0.0.0
+      PORT: 3000
+      APP_URL: ${APP_URL:-http://localhost:3000}
+      EXTERNAL_API_BASE_URL: ${EXTERNAL_API_BASE_URL:-}
+      EXTERNAL_API_TOKEN: ${EXTERNAL_API_TOKEN:-}
+      USE_EXTERNAL_API: ${USE_EXTERNAL_API:-false}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.nuxt
+    restart: unless-stopped
+    networks:
+      - app-network
+      - proxy
+
+networks:
+  app-network:
+  proxy:
+    name: nginx-proxy
+    external: true

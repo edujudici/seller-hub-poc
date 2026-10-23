@@ -1,0 +1,6 @@
+{
+  "name": "Marketplace Colaborativo",
+  "description": "Plataforma de marketplace colaborativo integrado com Mercado Livre e Shopee para compartilhamento de catálogo, anúncios e gestão de estoque.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,266 @@
+import type {
+  Seller,
+  Product,
+  ConnectedAccount,
+  Ad,
+  Order,
+} from "~/types/collab";
+
+export const INITIAL_SELLERS: Seller[] = [
+  {
+    id: "seller_1",
+    name: "Bruno Costa",
+    email: "bruno@techdrop.com.br",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80",
+    storeName: "TechDrop Distribuidora",
+  },
+  {
+    id: "seller_2",
+    name: "Clara Lima",
+    email: "clara@claravariedades.com.br",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80",
+    storeName: "Clara Variedades e Revendas",
+  },
+  {
+    id: "seller_3",
+    name: "Mariana Mendes",
+    email: "mariana@mendescalcados.com",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80",
+    storeName: "Mendes Calçados de Franca",
+  },
+];
+
+export const INITIAL_PRODUCTS: Product[] = [
+  {
+    id: "prod_1",
+    ownerId: "seller_1",
+    ownerName: "Bruno Costa",
+    title: "Smartwatch RunSport Pro",
+    description:
+      "Relógio inteligente esportivo à prova d'água (IP68) com GPS integrado, monitor de oxigênio sanguíneo, autonomia de 14 dias e mais de 100 modos esportivos. Ideal para alta performance física.",
+    price: 119.0,
+    suggestedRetailPrice: 199.9,
+    stock: 28,
+    category: "Relógios & Wearables",
+    imageUrl:
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=600&q=80",
+    sku: "TD-SMART-RS",
+    createdAt: "2026-05-10T10:30:00Z",
+  },
+  {
+    id: "prod_2",
+    ownerId: "seller_1",
+    ownerName: "Bruno Costa",
+    title: "Carregador Portátil Turbo 20.000mAh",
+    description:
+      "Powerbank de alta densidade com entrega de energia (Power Delivery) USB-C de 22.5W. Carrega simultaneamente até 3 dispositivos. Visor LED com indicador exato de bateria e homologação Anatel.",
+    price: 69.9,
+    suggestedRetailPrice: 129.9,
+    stock: 45,
+    category: "Acessórios Celular",
+    imageUrl:
+      "https://images.unsplash.com/photo-1609592424109-dd9892f1b17c?auto=format&fit=crop&w=600&q=80",
+    sku: "TD-CARG-20",
+    createdAt: "2026-05-12T14:45:00Z",
+  },
+  {
+    id: "prod_3",
+    ownerId: "seller_1",
+    ownerName: "Bruno Costa",
+    title: "Fone Bluetooth True Wireless ANC",
+    description:
+      "Fones intra-auriculares ergonômicos com cancelamento ativo de ruído inteligente de até 35dB, drivers dinâmicos de 11mm para graves profundos e estojo de carregamento sem fio com autonomia total de 28 horas.",
+    price: 85.0,
+    suggestedRetailPrice: 159.0,
+    stock: 60,
+    category: "Moda & Áudio",
+    imageUrl:
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80",
+    sku: "TD-FONE-ANC",
+    createdAt: "2026-05-15T09:12:00Z",
+  },
+  {
+    id: "prod_4",
+    ownerId: "seller_3",
+    ownerName: "Mariana Mendes",
+    title: "Tênis Casual Slip-on Comfort Line",
+    description:
+      "Tênis slip-on unissex super maleável com solado em EVA expandido antiderrapante e tecido em malha respirável. Conforto excelente para rotinas de pé ou passeios, produzido artesanalmente em Franca-SP.",
+    price: 49.9,
+    suggestedRetailPrice: 89.9,
+    stock: 18,
+    category: "Calçados",
+    imageUrl:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+    sku: "MC-TEN-SLIP",
+    createdAt: "2026-05-20T11:20:00Z",
+  },
+  {
+    id: "prod_5",
+    ownerId: "seller_3",
+    ownerName: "Mariana Mendes",
+    title: "Sapatilha Comfort Ortopédica Couro",
+    description:
+      "Sapatilha feminina 100% couro legítimo bovino, com palmilha de conforto anatômica gel e absorção de suor. Solado flexível e bico arredondado. Ideal para quem sofre de cansaço nos pés ou fascite.",
+    price: 59.9,
+    suggestedRetailPrice: 109.9,
+    stock: 30,
+    category: "Calçados",
+    imageUrl:
+      "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=600&q=80",
+    sku: "MC-SAP-ORT",
+    createdAt: "2026-05-22T16:05:00Z",
+  },
+];
+
+export const INITIAL_ACCOUNTS: ConnectedAccount[] = [
+  {
+    id: "acc_1",
+    sellerId: "seller_1",
+    platform: "mercadolivre",
+    storeName: "TechDrop Oficial MercadoLivre",
+    status: "connected",
+    username: "techdrop_ml_oficial",
+  },
+  {
+    id: "acc_2",
+    sellerId: "seller_1",
+    platform: "shopee",
+    storeName: "TechDrop Shopee Store",
+    status: "connected",
+    username: "techdrop.br",
+  },
+  {
+    id: "acc_3",
+    sellerId: "seller_2",
+    platform: "mercadolivre",
+    storeName: "Clara Express MercadoLivre",
+    status: "connected",
+    username: "clara_express_ml",
+  },
+  {
+    id: "acc_4",
+    sellerId: "seller_2",
+    platform: "shopee",
+    storeName: "Clara Promos Shopee",
+    status: "connected",
+    username: "clarapromos_shopee",
+  },
+  {
+    id: "acc_5",
+    sellerId: "seller_3",
+    platform: "shopee",
+    storeName: "Mendes Calçados de Franca Oficial",
+    status: "connected",
+    username: "mendes_calcados_oficial",
+  },
+];
+
+export const INITIAL_ADS: Ad[] = [
+  {
+    id: "ad_1",
+    sellerId: "seller_2",
+    productId: "prod_1",
+    platform: "mercadolivre",
+    externalId: "MLB382910405",
+    advertisedPrice: 189.9,
+    status: "active",
+    platformAccountName: "Clara Express MercadoLivre",
+    title: "Smartwatch RunSport Pro Relógio Inteligente Original + Brinde",
+  },
+  {
+    id: "ad_2",
+    sellerId: "seller_2",
+    productId: "prod_2",
+    platform: "shopee",
+    externalId: "SHP-91048-23",
+    advertisedPrice: 125.0,
+    status: "active",
+    platformAccountName: "Clara Promos Shopee",
+    title: "Carregador Turbo Powerbank 20000mAh Power Delivery 22.5W",
+  },
+  {
+    id: "ad_3",
+    sellerId: "seller_2",
+    productId: "prod_4",
+    platform: "shopee",
+    externalId: "SHP-12845-90",
+    advertisedPrice: 89.9,
+    status: "active",
+    platformAccountName: "Clara Promos Shopee",
+    title: "Tênis Casual Slip-on Levíssimo Tecido Elástico Antiderrapante",
+  },
+  {
+    id: "ad_4",
+    sellerId: "seller_1",
+    productId: "prod_1",
+    platform: "mercadolivre",
+    externalId: "MLB910482312",
+    advertisedPrice: 199.9,
+    status: "active",
+    platformAccountName: "TechDrop Oficial MercadoLivre",
+    title: "Smartwatch Esportivo RunSport Pro Resistente À Água IP68 Bluetooth",
+  },
+];
+
+export const INITIAL_ORDERS: Order[] = [
+  {
+    id: "PED-90812-ML",
+    adId: "ad_1",
+    productId: "prod_1",
+    advertiserId: "seller_2",
+    ownerId: "seller_1",
+    platform: "mercadolivre",
+    buyerName: "Alessandro Medeiros",
+    buyerAddress:
+      "Avenida Paulista, 1200, Apto 54B - Bela Vista, São Paulo - SP, CEP 01310-100",
+    quantity: 1,
+    totalAmount: 189.9,
+    ownerPayout: 119.0,
+    advertiserProfit: 70.9,
+    status: "pending",
+    shippingLabelId: "LABEL-ML-881903-SP",
+    trackingNumber: "BR-ML-772891902-X",
+    createdAt: "2026-06-11T22:30:00Z",
+  },
+  {
+    id: "PED-12739-SHP",
+    adId: "ad_2",
+    productId: "prod_2",
+    advertiserId: "seller_2",
+    ownerId: "seller_1",
+    platform: "shopee",
+    buyerName: "Mariana de Oliveira",
+    buyerAddress: "Rua das Flores, 45 - Centro, Franca - SP, CEP 14400-010",
+    quantity: 2,
+    totalAmount: 250.0,
+    ownerPayout: 139.8,
+    advertiserProfit: 110.2,
+    status: "ready_to_ship",
+    shippingLabelId: "LABEL-SHP-2291048",
+    trackingNumber: "BR-SHP-1182401-AA",
+    createdAt: "2026-06-11T13:10:00Z",
+  },
+  {
+    id: "PED-88129-SHP",
+    adId: "ad_3",
+    productId: "prod_4",
+    advertiserId: "seller_2",
+    ownerId: "seller_3",
+    platform: "shopee",
+    buyerName: "Carlos Eduardo Santana",
+    buyerAddress:
+      "Praça da República, S/N - Centro, Rio de Janeiro - RJ, CEP 20211-350",
+    quantity: 1,
+    totalAmount: 89.9,
+    ownerPayout: 49.9,
+    advertiserProfit: 40.0,
+    status: "shipped",
+    shippingLabelId: "LABEL-SHP-4049281",
+    trackingNumber: "PM102931824BR",
+    createdAt: "2026-06-10T09:15:00Z",
+  },
+];
